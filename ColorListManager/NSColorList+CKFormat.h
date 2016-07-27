@@ -16,4 +16,7 @@
 + (NSColorList *)ck_colorListWithName:(NSString *)name formatSting:(NSString *)formatString;
 - (NSString *)ck_formatString;
 
+- (NSString *)ck_formatCategoryHeader;
+- (NSString *)ck_formatCategorySource;
+
 @end

@@ -68,6 +68,20 @@
     [[NSWorkspace sharedWorkspace] selectFile:nil inFileViewerRootedAtPath:filePath];
 }
 
+- (IBAction)onExportCategoryButtonTouched:(id)sender {
+    NSColorList *currentColorList = self.colorListArray[self.comboBox.indexOfSelectedItem];
+    
+    if (currentColorList != nil) {
+        NSString * const userHome = NSHomeDirectoryForUser(NSUserName());
+        NSString * const filePath = [NSString stringWithFormat:@"%@/Library/Colors/", userHome];
+        NSString * const headerFilePath = [NSString stringWithFormat:@"%@UIColor+%@.h", filePath, currentColorList.name];
+        NSString * const sourceFilePath = [NSString stringWithFormat:@"%@UIColor+%@.m", filePath, currentColorList.name];
+        
+        [[currentColorList ck_formatCategoryHeader] writeToFile:headerFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        [[currentColorList ck_formatCategorySource] writeToFile:sourceFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    }
+}
+
 #pragma mark - NSComboBoxDataSource
 - (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox {
     return self.colorListArray.count;

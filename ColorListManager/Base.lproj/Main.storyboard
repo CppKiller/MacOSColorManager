@@ -138,7 +138,7 @@
                                 </scroller>
                             </scrollView>
                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ol4-vt-Lnt">
-                                <rect key="frame" x="15" y="230" width="276" height="26"/>
+                                <rect key="frame" x="15" y="230" width="151" height="26"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="8" id="vKJ-um-C0Z">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -150,7 +150,7 @@
                                 </connections>
                             </comboBox>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t5k-6e-7yH">
-                                <rect key="frame" x="366" y="227" width="105" height="32"/>
+                                <rect key="frame" x="241" y="227" width="105" height="32"/>
                                 <buttonCell key="cell" type="push" title="调色板目录" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ulI-AW-4zY">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -160,13 +160,23 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fkz-gX-uju">
-                                <rect key="frame" x="297" y="227" width="66" height="32"/>
+                                <rect key="frame" x="172" y="227" width="66" height="32"/>
                                 <buttonCell key="cell" type="push" title="保存" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UO1-ID-QhD">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="onSaveButtonTouched:" target="XfG-lQ-9wD" id="SfE-Jv-BA2"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jng-PX-wC4">
+                                <rect key="frame" x="349" y="227" width="122" height="32"/>
+                                <buttonCell key="cell" type="push" title="导出Category" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Dei-Rz-er6">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onExportCategoryButtonTouched:" target="XfG-lQ-9wD" id="NlQ-PI-yB0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -176,10 +186,13 @@
                             <constraint firstItem="n1R-ll-ixQ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="15" id="7Ca-Qo-CpK"/>
                             <constraint firstAttribute="trailing" secondItem="n1R-ll-ixQ" secondAttribute="trailing" constant="15" id="7qp-Y2-ZqF"/>
                             <constraint firstItem="t5k-6e-7yH" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="15" id="8zk-0Z-eYV"/>
+                            <constraint firstItem="jng-PX-wC4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="15" id="FOZ-3c-YzK"/>
+                            <constraint firstItem="jng-PX-wC4" firstAttribute="leading" secondItem="t5k-6e-7yH" secondAttribute="trailing" constant="15" id="JlP-Yd-z7a"/>
+                            <constraint firstItem="n1R-ll-ixQ" firstAttribute="top" secondItem="jng-PX-wC4" secondAttribute="bottom" constant="10" id="Lxm-OO-wlh"/>
+                            <constraint firstAttribute="trailing" secondItem="jng-PX-wC4" secondAttribute="trailing" constant="15" id="TjX-oA-yqR"/>
                             <constraint firstItem="Ol4-vt-Lnt" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="15" id="Wzm-se-A88"/>
                             <constraint firstItem="t5k-6e-7yH" firstAttribute="leading" secondItem="Fkz-gX-uju" secondAttribute="trailing" constant="15" id="XrF-Nd-sRU"/>
                             <constraint firstItem="n1R-ll-ixQ" firstAttribute="top" secondItem="t5k-6e-7yH" secondAttribute="bottom" constant="10" id="bKE-rN-OfQ"/>
-                            <constraint firstAttribute="trailing" secondItem="t5k-6e-7yH" secondAttribute="trailing" constant="15" id="ckr-AH-M0V"/>
                             <constraint firstItem="Fkz-gX-uju" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="15" id="fIz-7b-Ovi"/>
                             <constraint firstItem="n1R-ll-ixQ" firstAttribute="top" secondItem="Ol4-vt-Lnt" secondAttribute="bottom" constant="10" id="gyV-47-D2N"/>
                         </constraints>
