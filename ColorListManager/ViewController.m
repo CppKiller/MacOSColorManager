@@ -69,16 +69,47 @@
 }
 
 - (IBAction)onExportCategoryButtonTouched:(id)sender {
+    if (self.comboBox.indexOfSelectedItem < 0 || self.comboBox.indexOfSelectedItem >= self.colorListArray.count) {
+        return;
+    }
+    
     NSColorList *currentColorList = self.colorListArray[self.comboBox.indexOfSelectedItem];
     
     if (currentColorList != nil) {
         NSString * const userHome = NSHomeDirectoryForUser(NSUserName());
         NSString * const filePath = [NSString stringWithFormat:@"%@/Library/Colors/", userHome];
-        NSString * const headerFilePath = [NSString stringWithFormat:@"%@UIColor+%@.h", filePath, currentColorList.name];
-        NSString * const sourceFilePath = [NSString stringWithFormat:@"%@UIColor+%@.m", filePath, currentColorList.name];
         
-        [[currentColorList ck_formatCategoryHeader] writeToFile:headerFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-        [[currentColorList ck_formatCategorySource] writeToFile:sourceFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        NSSavePanel *saveDlg = [[NSSavePanel alloc]init];
+        saveDlg.title = @"导出Category";
+        saveDlg.message = @"导出UIColor的Category";
+        saveDlg.allowedFileTypes = nil;
+        saveDlg.directoryURL = [NSURL URLWithString:filePath];
+        saveDlg.nameFieldStringValue = [NSString stringWithFormat:@"UIColor+%@", currentColorList.name];
+        [saveDlg beginWithCompletionHandler: ^(NSInteger result){
+            if(result==NSFileHandlingPanelOKButton){
+                NSURL *url =[saveDlg URL];
+                [self saveColorList:currentColorList toCategoryFile:url];
+            }
+        }];
+        
+    }
+}
+
+- (void)saveColorList:(NSColorList *)colorList toCategoryFile:(NSURL *)fileUrl {
+    NSString *extension = fileUrl.pathExtension;
+    NSString *pathString = fileUrl.absoluteString;
+    NSString *extensionString = extension.length > 0 ? [NSString stringWithFormat:@".%@", extension] : @"";
+    NSString *pathWithoutExtension = [pathString substringToIndex:pathString.length - extensionString.length];
+    
+    NSURL * const headerFilePathURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@.h", pathWithoutExtension]];
+    NSURL * const sourceFilePathURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@.m", pathWithoutExtension]];
+    
+    NSError *error;
+    [[colorList ck_formatCategoryHeader] writeToURL:headerFilePathURL atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    [[colorList ck_formatCategorySource] writeToURL:sourceFilePathURL atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    
+    if(error){
+        NSLog(@"save file error %@",error);
     }
 }
 
